@@ -8,7 +8,8 @@ const contactLinks = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>
     ),
-    color: "#f59e0b",
+    color: "#b45309",
+    bg: "#fef3c7",
   },
   {
     label: "Phone",
@@ -19,7 +20,8 @@ const contactLinks = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
       </svg>
     ),
-    color: "#a855f7",
+    color: "#be185d",
+    bg: "#fce7f3",
   },
   {
     label: "Location",
@@ -31,7 +33,8 @@ const contactLinks = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
     ),
-    color: "#22c55e",
+    color: "#047857",
+    bg: "#d1fae5",
   },
   {
     label: "LinkedIn",
@@ -43,35 +46,34 @@ const contactLinks = [
       </svg>
     ),
     color: "#0a66c2",
+    bg: "#dbeafe",
   },
 ];
 
 export function ContactSection() {
   return (
-    <section id="contact" className="relative py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(220_20%_6%)] to-[hsl(220_18%_4%)]" />
-
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[hsl(38_92%_50%_/_0.3)] to-transparent" />
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-[hsl(280_60%_65%_/_0.05)] blur-3xl" />
-      <div className="absolute top-1/2 right-0 w-64 h-64 rounded-full bg-[hsl(38_92%_50%_/_0.05)] blur-3xl" />
+    <section id="contact" className="relative py-32 overflow-hidden" style={{ background: "hsl(38 40% 97%)" }}>
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-300/60 to-transparent" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full opacity-15 pointer-events-none"
+        style={{ background: "radial-gradient(circle, hsl(340 75% 70%) 0%, transparent 70%)", transform: "translate(30%, 30%)" }} />
+      <div className="absolute top-1/3 left-0 w-64 h-64 rounded-full opacity-10 pointer-events-none"
+        style={{ background: "radial-gradient(circle, hsl(38 90% 60%) 0%, transparent 70%)", transform: "translate(-30%, 0)" }} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="reveal text-center mb-20">
-          <span className="text-xs tracking-[0.4em] uppercase text-[hsl(38_92%_50%)] mb-4 block">Get in Touch</span>
-          <h2 className="text-5xl md:text-7xl font-serif text-white mb-6">
+          <span className="text-xs tracking-[0.4em] uppercase text-amber-600 mb-4 block font-semibold">Get in Touch</span>
+          <h2 className="text-5xl md:text-7xl font-serif text-stone-800 mb-6">
             Let's <span className="gold-text">Collaborate</span>
           </h2>
-          <p className="text-white/40 max-w-xl mx-auto leading-relaxed">
+          <p className="text-stone-400 max-w-xl mx-auto leading-relaxed">
             Whether you're looking for a content writer, journalist, interview host, or creative collaborator —
             I'd love to bring your story to life. Let's talk.
           </p>
         </div>
 
-        {/* Contact grid */}
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          {/* Left: Links */}
+          {/* Contact links */}
           <div className="space-y-4 stagger reveal">
             {contactLinks.map((link) => (
               <a
@@ -79,19 +81,17 @@ export function ContactSection() {
                 href={link.href}
                 target={link.href.startsWith("http") ? "_blank" : undefined}
                 rel="noopener noreferrer"
-                className="group flex items-center gap-5 bg-[hsl(220_18%_10%)] border border-white/5 rounded-2xl p-6 card-glow hover:border-white/10 transition-all"
+                className="group flex items-center gap-5 bg-white border border-stone-200 rounded-2xl p-6 card-glow shadow-sm hover:border-stone-300 transition-all"
               >
                 <div
                   className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-all group-hover:scale-110"
-                  style={{ backgroundColor: `${link.color}15`, color: link.color }}
+                  style={{ backgroundColor: link.bg, color: link.color }}
                 >
                   {link.icon}
                 </div>
                 <div>
-                  <div className="text-xs text-white/30 tracking-widest uppercase mb-1">{link.label}</div>
-                  <div className="text-white/80 group-hover:text-white transition-colors font-medium text-sm">
-                    {link.value}
-                  </div>
+                  <div className="text-xs text-stone-400 tracking-widest uppercase mb-1 font-medium">{link.label}</div>
+                  <div className="text-stone-700 group-hover:text-stone-900 transition-colors font-semibold text-sm">{link.value}</div>
                 </div>
                 <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity" style={{ color: link.color }}>
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -102,19 +102,17 @@ export function ContactSection() {
             ))}
           </div>
 
-          {/* Right: Visual + CTA */}
+          {/* Right panel */}
           <div className="reveal-right">
-            <div className="bg-[hsl(220_18%_10%)] border border-white/5 rounded-3xl p-8 relative overflow-hidden">
-              {/* Decorative */}
-              <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-[hsl(38_92%_50%_/_0.1)] blur-xl" />
-              <div className="absolute -left-8 -bottom-8 w-24 h-24 rounded-full bg-[hsl(280_60%_65%_/_0.1)] blur-xl" />
+            <div className="bg-white border border-stone-200 rounded-3xl p-8 relative overflow-hidden shadow-sm">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 via-rose-400 to-transparent" />
+              <div className="absolute -right-8 -top-8 w-32 h-32 rounded-full opacity-10" style={{ background: "radial-gradient(circle, hsl(38 90% 60%), transparent)" }} />
+              <div className="absolute -left-8 -bottom-8 w-24 h-24 rounded-full opacity-10" style={{ background: "radial-gradient(circle, hsl(340 75% 70%), transparent)" }} />
 
               <div className="relative">
-                <div className="text-6xl mb-6">✨</div>
-                <h3 className="text-2xl font-serif text-white mb-4">
-                  Open to Opportunities
-                </h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-8">
+                <div className="text-5xl mb-6">✨</div>
+                <h3 className="text-2xl font-serif text-stone-800 mb-4">Open to Opportunities</h3>
+                <p className="text-stone-500 text-sm leading-relaxed mb-8">
                   Currently available for freelance projects, full-time roles, and collaborations
                   in journalism, content creation, newspaper design, and multimedia production.
                 </p>
@@ -127,8 +125,8 @@ export function ContactSection() {
                     "Interview Hosting & Production",
                     "Voice Over & Short Films",
                   ].map((item) => (
-                    <div key={item} className="flex items-center gap-3 text-sm text-white/60">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[hsl(38_92%_50%)] shrink-0" />
+                    <div key={item} className="flex items-center gap-3 text-sm text-stone-500">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
                       {item}
                     </div>
                   ))}
@@ -136,7 +134,7 @@ export function ContactSection() {
 
                 <a
                   href="mailto:nandiniagarwal0012@gmail.com"
-                  className="group w-full flex items-center justify-center gap-3 px-8 py-4 bg-[hsl(38_92%_50%)] text-[hsl(220_20%_6%)] font-semibold rounded-2xl hover:bg-[hsl(42_95%_65%)] transition-all duration-300 text-sm tracking-wider uppercase"
+                  className="group w-full flex items-center justify-center gap-3 px-8 py-4 bg-[hsl(35_85%_42%)] text-white font-semibold rounded-2xl hover:bg-[hsl(35_85%_36%)] transition-all duration-300 text-sm tracking-wider uppercase shadow-lg shadow-amber-700/20"
                 >
                   Send a Message
                   <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -149,17 +147,15 @@ export function ContactSection() {
         </div>
 
         {/* Footer */}
-        <div className="reveal mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="reveal mt-24 pt-8 border-t border-stone-200 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-xl font-serif gold-text font-bold">Nandini Agarwal</div>
-          <p className="text-white/20 text-xs text-center">
-            © 2024 Nandini Agarwal · Journalist · Content Creator · Storyteller
-          </p>
-          <div className="flex items-center gap-4 text-white/20 text-xs">
-            <a href="mailto:nandiniagarwal0012@gmail.com" className="hover:text-[hsl(38_92%_50%)] transition-colors">Email</a>
+          <p className="text-stone-300 text-xs text-center">© 2024 Nandini Agarwal · Journalist · Content Creator · Storyteller</p>
+          <div className="flex items-center gap-4 text-stone-400 text-xs">
+            <a href="mailto:nandiniagarwal0012@gmail.com" className="hover:text-amber-600 transition-colors">Email</a>
             <span>·</span>
-            <a href="tel:+919582001950" className="hover:text-[hsl(38_92%_50%)] transition-colors">Phone</a>
+            <a href="tel:+919582001950" className="hover:text-amber-600 transition-colors">Phone</a>
             <span>·</span>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-[hsl(38_92%_50%)] transition-colors">LinkedIn</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-amber-600 transition-colors">LinkedIn</a>
           </div>
         </div>
       </div>
