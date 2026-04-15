@@ -8,7 +8,6 @@ import { ExperienceSection } from "@/components/ExperienceSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { PublicationsSection } from "@/components/PublicationsSection";
 import { AwardsSection } from "@/components/AwardsSection";
-import { DirectoryFlowchartSection } from "@/components/DirectoryFlowchartSection";
 import { ContactSection } from "@/components/ContactSection";
 
 function useScrollReveal() {
@@ -118,7 +117,6 @@ function App() {
         <ProjectsSection />
         <PublicationsSection />
         <AwardsSection />
-        <DirectoryFlowchartSection />
         <ContactSection />
       </main>
     </div>
