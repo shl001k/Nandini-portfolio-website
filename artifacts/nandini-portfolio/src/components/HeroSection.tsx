@@ -14,7 +14,7 @@ function TypewriterText() {
   const [currentRole, setCurrentRole] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     const role = roles[currentRole];
@@ -232,6 +232,107 @@ function MediaAnimation() {
   );
 }
 
+/* ---- MEDIA ANIMATION V2: an interactive editorial story desk ---- */
+function EditorialMediaAnimation({ mousePos }: { mousePos: { x: number; y: number } }) {
+  const orbitCards = [
+    { label: "FIELD NOTES", detail: "Delhi NCR · 06:42", className: "story-card story-card-notes", accent: "amber" },
+    { label: "ON AIR", detail: "Interview / live", className: "story-card story-card-air", accent: "rose" },
+    { label: "THE DAILY", detail: "Page 01 · 2026", className: "story-card story-card-paper", accent: "ink" },
+  ];
+
+  return (
+    <div className="media-stage w-full h-full relative flex items-center justify-center select-none pointer-events-none">
+      <div className="media-grid absolute inset-8 rounded-[2rem] opacity-70" />
+      <div className="media-glow absolute w-[25rem] h-[25rem] rounded-full" />
+
+      <div className="media-corner-label absolute top-12 right-10 sm:right-16">
+        <span className="inline-block w-2 h-2 rounded-full bg-rose-500 animate-pulse mr-2" />
+        LIVE STORY DESK
+      </div>
+      <div className="media-index absolute bottom-16 left-10 sm:left-16">
+        <span>NA / 001</span>
+        <span className="media-index-line" />
+        <span>MEDIA · VOICE · PRINT</span>
+      </div>
+
+      <div className="film-column film-column-left">
+        <div className="film-column-track">
+          {[...Array(14)].map((_, i) => (
+            <div className="film-frame" key={i}>
+              <span className="film-frame-image" style={{ backgroundImage: i % 3 === 0 ? "url('/nandini.jpeg')" : undefined }}>
+                {i % 3 !== 0 && <span className="film-frame-lines" />}
+              </span>
+              <span className="film-sprockets"><i /><i /><i /><i /></span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="film-column film-column-right">
+        <div className="film-column-track">
+          {[...Array(14)].map((_, i) => (
+            <div className="film-frame" key={i}>
+              <span className="film-frame-image film-frame-image-warm"><span className="film-frame-lines" /></span>
+              <span className="film-sprockets"><i /><i /><i /><i /></span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div
+        className="story-lens"
+        style={{ transform: `translate(calc(-50% + ${mousePos.x * 0.45}px), calc(-50% + ${mousePos.y * 0.45}px))` }}
+      >
+        <div className="story-lens-orbit story-lens-orbit-one" />
+        <div className="story-lens-orbit story-lens-orbit-two" />
+        <div className="story-lens-radar" />
+        <div className="story-lens-glass">
+          <img src="/nandini.jpeg" alt="Nandini Agarwal" />
+          <div className="story-lens-sheen" />
+          <div className="story-lens-crosshair story-lens-crosshair-horizontal" />
+          <div className="story-lens-crosshair story-lens-crosshair-vertical" />
+          <div className="story-lens-caption">STORY<br /><strong>IN FOCUS</strong></div>
+        </div>
+        <div className="story-lens-aperture">
+          {[...Array(6)].map((_, i) => <span key={i} style={{ transform: `rotate(${i * 60}deg)` }} />)}
+        </div>
+        <div className="story-lens-tickmarks">
+          {[...Array(24)].map((_, i) => <span key={i} style={{ transform: `rotate(${i * 15}deg)` }} />)}
+        </div>
+      </div>
+
+      <div className="story-card-layer" style={{ transform: `translate(${mousePos.x * 0.9}px, ${mousePos.y * 0.9}px)` }}>
+        {orbitCards.map((card) => (
+          <div key={card.label} className={`${card.className} ${card.accent}`}>
+            <div className="story-card-topline"><span /> {card.label}</div>
+            <div className="story-card-detail">{card.detail}</div>
+            {card.accent === "rose" && (
+              <div className="mini-wave">
+                {[8, 16, 11, 22, 14, 19, 9, 17, 12].map((height, i) => <i key={i} style={{ height }} />)}
+              </div>
+            )}
+            {card.accent === "ink" && <div className="mini-headline">THE<br /><em>NEW</em><br />ANGLE</div>}
+          </div>
+        ))}
+      </div>
+
+      <div className="editorial-signal editorial-signal-left">
+        <span className="signal-dot" />
+        <span className="signal-line" />
+        <span className="signal-copy">LOOK<br />LISTEN<br />REPORT</span>
+      </div>
+      <div className="editorial-signal editorial-signal-right">
+        <span className="signal-copy">AUDIO<br />VISUAL<br />TEXT</span>
+        <span className="signal-line" />
+        <span className="signal-dot" />
+      </div>
+
+      <div className="media-ticker absolute bottom-8 left-1/2 -translate-x-1/2">
+        <span>JOURNALISM</span><b>×</b><span>STORYTELLING</span><b>×</b><span>CONVERSATIONS</span>
+      </div>
+    </div>
+  );
+}
+
 export function HeroSection() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
@@ -260,7 +361,7 @@ export function HeroSection() {
 
       {/* Media Animation — right side */}
       <div className="absolute right-0 top-0 w-full md:w-[52%] h-full">
-        <MediaAnimation />
+        <EditorialMediaAnimation mousePos={mousePos} />
       </div>
 
       {/* Light gradient overlay so left content is legible */}
@@ -338,7 +439,7 @@ export function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
+      <div className="hero-scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
         <span className="text-stone-400 text-xs tracking-widest uppercase">Scroll</span>
         <div className="w-px h-10 bg-gradient-to-b from-amber-500/50 to-transparent animate-pulse" />
       </div>
