@@ -257,6 +257,23 @@
 }
 
 /* Editorial story desk */
+.hero-frame {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: clamp(7rem, 15vh, 10rem);
+  padding-bottom: clamp(5rem, 11vh, 8rem);
+}
+.hero-copy {
+  position: relative;
+}
+.hero-stats-grid > div {
+  min-width: 0;
+}
+.hero-stats-grid .text-xs {
+  line-height: 1.45;
+  white-space: normal;
+}
 .media-stage {
   isolation: isolate;
   color: hsl(25 20% 24%);
@@ -539,6 +556,11 @@
 @keyframes tickerBreath { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
 
 @media (max-width: 767px) {
+  .hero-frame {
+    display: block;
+    padding-top: 7.5rem;
+    padding-bottom: 6rem;
+  }
   .media-grid { inset: 20px 5px; background-size: 30px 30px; opacity: 0.45; }
   .media-corner-label { top: 7rem; right: 1.5rem; transform: scale(0.84); transform-origin: right top; }
   .media-index { bottom: 5rem; left: 2rem; transform: rotate(-90deg) translateX(-100%) scale(0.8); }

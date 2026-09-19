@@ -369,8 +369,8 @@ export function HeroSection() {
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[hsl(38_40%_97%)] to-transparent" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-16">
-        <div className="max-w-2xl">
+      <div className="hero-frame relative z-10 w-full px-6 md:px-12 lg:px-20 pt-28 pb-16">
+        <div className="hero-copy w-full md:w-[54%] max-w-[620px]">
           {/* Tag */}
           <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-amber-400/50 bg-amber-50 text-amber-700 text-sm tracking-widest uppercase font-medium">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
@@ -402,7 +402,7 @@ export function HeroSection() {
           </p>
 
           {/* Stats */}
-          <div className="flex flex-wrap gap-8 mb-10">
+          <div className="hero-stats-grid grid grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-6 mb-10">
             {[
               { num: "20+", label: "Published Articles" },
               { num: "10+", label: "Newspapers Designed" },
